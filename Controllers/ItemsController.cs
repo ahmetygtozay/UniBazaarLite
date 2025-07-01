@@ -41,6 +41,7 @@ namespace UniBazaarLite.Controllers
         public IActionResult Create(Listing listing)
         {
             if (!ModelState.IsValid)
+                Console.WriteLine("budax+++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 return View(listing);
 
             listing.SellerEmail = "admin@example.com"; // Simüle kullanıcı

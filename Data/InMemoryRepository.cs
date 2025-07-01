@@ -5,12 +5,15 @@ using System;
 
 namespace UniBazaarLite.Data
 {
+
+
     public class InMemoryRepository : IRepository
     {
         private readonly List<Event> _events = new();
         private readonly List<Listing> _listings = new();
         private int _eventId = 2;   // 1 zaten eklendi
         private int _listingId = 1;
+
 
         public InMemoryRepository()
         {
@@ -48,6 +51,7 @@ namespace UniBazaarLite.Data
         {
             listing.Id = _listingId++;
             _listings.Add(listing);
+
         }
 
         public int GetNextEventId()

@@ -34,6 +34,7 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
+
     endpoints.MapControllers(); // MVC rotalarýný etkinleþtir
     endpoints.MapRazorPages(); // Razor Pages rotalarýný etkinleþtir
     endpoints.MapControllerRoute(

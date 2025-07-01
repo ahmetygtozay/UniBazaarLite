@@ -8,17 +8,17 @@
 
 <form method="post">
     <div>
-        <label asp-for="Input.Title"></label>
+        <label asp-for="Input.Title">Title</label>
         <input asp-for="Input.Title" />
         <span asp-validation-for="Input.Title"></span>
     </div>
     <div>
-        <label asp-for="Input.Description"></label>
+        <label asp-for="Input.Description">Description</label>
         <textarea asp-for="Input.Description"></textarea>
         <span asp-validation-for="Input.Description"></span>
     </div>
     <div>
-        <label asp-for="Input.Date"></label>
+        <label asp-for="Input.Date">Date</label>
         <input asp-for="Input.Date" type="date" />
         <span asp-validation-for="Input.Date"></span>
     </div>
