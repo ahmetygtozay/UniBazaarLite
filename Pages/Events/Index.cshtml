@@ -1,0 +1,31 @@
+﻿@page
+@model UniBazaarLite.Pages.Events.IndexModel
+@{
+    ViewData["Title"] = "Upcoming Events";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-page="Create">Create New Event</a>
+</p>
+
+@if (!Model.Events.Any())
+{
+    <p>No events found.</p>
+}
+else
+{
+    <ul>
+        @foreach (var evt in Model.Events)
+        {
+            <li>
+                <strong>@evt.Title</strong> - @evt.Date.ToShortDateString()
+                <br />
+                @evt.Description
+                <br />
+                <a asp-page="Register" asp-route-id="@evt.Id">Register</a>
+            </li>
+        }
+    </ul>
+}

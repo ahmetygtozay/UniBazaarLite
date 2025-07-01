@@ -1,0 +1,9 @@
+﻿@model UniBazaarLite.Models.Listing
+@{
+    ViewData["Title"] = "Item Details";
+}
+
+<h2>@Model.Title</h2>
+<p><strong>Description:</strong> @Model.Description</p>
+<p><strong>Price:</strong> $@Model.Price</p>
+<p><strong>Seller:</strong> @Model.SellerEmail</p>

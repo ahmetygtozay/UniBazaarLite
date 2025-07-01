@@ -1,34 +1,44 @@
-namespace UniBazaarLite
+using UniBazaarLite.Data;
+using UniBazaarLite.Filters;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRazorPages();
+
+builder.Services.AddControllersWithViews(options =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+    options.Filters.Add<LogActivityFilter>();
+});
 
-            // Add services to the container.
-            builder.Services.AddRazorPages();
+builder.Services.AddScoped<ValidateEntityExistsFilter>();
 
-            var app = builder.Build();
+builder.Services.AddSingleton<IRepository, InMemoryRepository>();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+var app = builder.Build();
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.MapRazorPages();
-
-            app.Run();
-        }
-    }
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+//app.MapRazorPages();
+//app.MapControllers();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers(); // MVC rotalarýný etkinleþtir
+    endpoints.MapRazorPages(); // Razor Pages rotalarýný etkinleþtir
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"); // Varsayýlan MVC rotasý
+});
+
+app.Run();
