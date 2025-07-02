@@ -1,8 +1,11 @@
-﻿@{
+﻿
+@{
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 @using System.Linq;
 @model List<UniBazaarLite.Models.Listing>
+
+<link rel="stylesheet" href="~/css/details.css" asp-append-version="true" />
 
 <h2>Items for Sale</h2>
 
@@ -16,16 +19,21 @@
 }
 else
 {
-    <ul>
-        @foreach (var item in Model)
-        {
-            <li>
-                <strong>@item.Title</strong> - ₺@item.Price
-                <br />
-                <em>@item.Description</em>
-                <br />
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-            </li>
-        }
-    </ul>
+    <div class="item-container">
+    @foreach (var item in Model)
+    {
+        <div class="item-card">
+            <h3>@item.Title</h3>
+            <p><strong>Description:</strong> @item.Description</p>
+            <p><strong>Price:</strong> ₺@item.Price</p>
+            <p class="seller"><strong>Seller:</strong> @item.SellerEmail</p>
+
+            <form asp-controller="Items" asp-action="Buy" method="post">
+                <input type="hidden" name="id" value="@item.Id" />
+                <button type="submit" class="buy-button">Satın Al</button>
+            </form>
+        </div>
+    }
+</div>
+
 }
