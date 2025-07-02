@@ -43,7 +43,11 @@ namespace UniBazaarLite.Data
                 _events[index] = evt;
         }
 
-        public List<Listing> GetListings() => _listings;
+        public List<Listing> GetListings()
+        {
+            Console.WriteLine($"Total listings: {_listings.Count}");
+            return _listings;
+        }
 
         public Listing? GetListingById(int id) => _listings.FirstOrDefault(l => l.Id == id);
 
@@ -51,7 +55,7 @@ namespace UniBazaarLite.Data
         {
             listing.Id = _listingId++;
             _listings.Add(listing);
-
+            Console.WriteLine($"Listing added: {listing.Title}, Price: {listing.Price}");
         }
 
         public int GetNextEventId()

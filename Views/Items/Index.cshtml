@@ -1,15 +1,14 @@
 ﻿@{
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-
+@using System.Linq;
 @model List<UniBazaarLite.Models.Listing>
 
 <h2>Items for Sale</h2>
 
 <p>
-    <a href="/Items/Create">Create New Item</a>
+    <a href="/Items/Create" class="btn-create">Create New Item</a>
 </p>
-
 
 @if (!Model.Any())
 {
@@ -22,6 +21,8 @@ else
         {
             <li>
                 <strong>@item.Title</strong> - ₺@item.Price
+                <br />
+                <em>@item.Description</em>
                 <br />
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </li>

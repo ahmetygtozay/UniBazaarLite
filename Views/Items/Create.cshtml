@@ -1,95 +1,71 @@
 ﻿@{
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-
 @model UniBazaarLite.Models.Listing
-
-<style>
-    form {
-        max-width: 500px;
-        margin: 20px auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        background: #f9f9f9;
-        font-family: Arial, sans-serif;
-    }
-
-        form div {
-            margin-bottom: 1.2rem;
-        }
-
-    label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 0.4rem;
-        color: #333;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    textarea {
-        width: 100%;
-        padding: 8px 10px;
-        font-size: 1rem;
-        border: 1px solid #bbb;
-        border-radius: 4px;
-        box-sizing: border-box;
-        transition: border-color 0.3s ease;
-    }
-
-        input[type="text"]:focus,
-        input[type="number"]:focus,
-        textarea:focus {
-            border-color: #007bff;
-            outline: none;
-            background: #fff;
-        }
-
-    span.field-validation-error {
-        color: #d9534f;
-        font-size: 0.9rem;
-    }
-
-    button {
-        background-color: #007bff;
-        color: white;
-        padding: 10px 18px;
-        border: none;
-        border-radius: 5px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-</style>
 
 <h2>Create New Listing</h2>
 
-<form asp-action="Create" method="post">
+<!-- Liste Alanı -->
+<ul id="listingList">
+    <!-- JavaScript ile yeni item'lar buraya eklenecek -->
+</ul>
+
+<!-- FORM -->
+<form id="listingForm">
     <div>
         <label asp-for="Title">Title</label>
-        <input asp-for="Title" />
+        <input asp-for="Title" id="title" />
         <span asp-validation-for="Title"></span>
     </div>
     <div>
         <label asp-for="Description">Description</label>
-        <textarea asp-for="Description"></textarea>
+        <textarea asp-for="Description" id="description"></textarea>
         <span asp-validation-for="Description"></span>
     </div>
     <div>
         <label asp-for="Price">Price</label>
-        <input asp-for="Price" type="number" step="1" />
+        <input asp-for="Price" type="number" step="1" id="price" />
         <span asp-validation-for="Price"></span>
     </div>
     <button type="submit">Create</button>
 </form>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <script>
+        document.getElementById('listingForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const listing = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                price: parseFloat(document.getElementById('price').value)
+            };
+
+            const response = await fetch('/Items/Create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(listing)
+            });
+
+            if (response.ok) {
+                const createdItem = await response.json();
+
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${createdItem.title}</strong> - ₺${createdItem.price} <br /> ${createdItem.description}`;
+                document.getElementById('listingList').appendChild(li);
+
+                // Formu temizle
+                document.getElementById('listingForm').reset();
+
+                // 1 saniye sonra /Items sayfasına yönlendir
+                setTimeout(() => {
+                    window.location.href = '/Items';
+                }, 1000);
+            } else {
+                alert("Error adding item.");
+            }
+        });
+    </script>
 }
