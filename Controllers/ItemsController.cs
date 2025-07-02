@@ -2,18 +2,20 @@
 using UniBazaarLite.Data;
 using UniBazaarLite.Filters;
 using UniBazaarLite.Models;
+using UniBazaarLite.Services;  // CurrentUser için
 
 namespace UniBazaarLite.Controllers
 {
     public class ItemsController : Controller
     {
         private readonly IRepository _repository;
+        private readonly CurrentUser _currentUser;
 
-        public ItemsController(IRepository repository)
+        public ItemsController(IRepository repository, CurrentUser currentUser)
         {
             _repository = repository;
+            _currentUser = currentUser;
         }
-
 
         [ServiceFilter(typeof(ValidateEntityExistsFilter))]
         public IActionResult Details(int id)
@@ -29,10 +31,14 @@ namespace UniBazaarLite.Controllers
             return View(items);
         }
 
-
         // GET: /Items/Create
         public IActionResult Create()
         {
+            if (!_currentUser.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -41,11 +47,17 @@ namespace UniBazaarLite.Controllers
         public IActionResult Create(Listing listing)
         {
             if (!ModelState.IsValid)
-                Console.WriteLine("budax+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            {
+                // Model geçerli değilse formu tekrar göster
                 return View(listing);
+            }
 
-            listing.SellerEmail = "admin@example.com"; // Simüle kullanıcı
+            // Simüle edilen kullanıcı emaili
+            listing.SellerEmail = _currentUser.Email;
+
             _repository.AddListing(listing);
+
+            // İşlem başarılıysa liste sayfasına yönlendir
             return RedirectToAction("Index");
         }
     }

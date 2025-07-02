@@ -1,0 +1,100 @@
+﻿@page
+@model UniBazaarLite.Pages.Events.EditModel
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<style>
+    h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #003366;
+        text-align: center;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    form div {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    .validation-message {
+        color: red;
+        font-size: 13px;
+    }
+
+    button {
+        background-color: #004080;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0059b3;
+    }
+</style>
+
+<h2>Edit Event</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Input.Id" />
+    
+    <div>
+        <label asp-for="Input.Title">Title</label>
+        <input asp-for="Input.Title" />
+        <span asp-validation-for="Input.Title" class="validation-message"></span>
+    </div>
+    
+    <div>
+        <label asp-for="Input.Description">Description</label>
+        <textarea asp-for="Input.Description"></textarea>
+        <span asp-validation-for="Input.Description" class="validation-message"></span>
+    </div>
+    
+    <div>
+        <label asp-for="Input.Date">Date</label>
+        <input asp-for="Input.Date" type="date" />
+        <span asp-validation-for="Input.Date" class="validation-message"></span>
+    </div>
+    
+    <button type="submit">Save</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

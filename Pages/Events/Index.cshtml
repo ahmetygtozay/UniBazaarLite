@@ -4,27 +4,98 @@
     ViewData["Title"] = "Upcoming Events";
 }
 
+<style>
+    h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #003366;
+        text-align: center;
+    }
+
+    .create-button {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 8px 16px;
+        background-color: #004080;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .create-button:hover {
+        background-color: #0059b3;
+    }
+
+    .event-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .event-card {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .event-card strong {
+        font-size: 20px;
+        color: #002244;
+    }
+
+    .event-card .date {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 5px;
+    }
+
+    .event-card .description {
+        margin-bottom: 10px;
+    }
+
+    .event-card a {
+        margin-right: 10px;
+        text-decoration: none;
+        color: #0066cc;
+        font-weight: bold;
+    }
+
+    .event-card a:hover {
+        text-decoration: underline;
+    }
+
+    .no-events {
+        font-style: italic;
+        color: #888;
+    }
+</style>
+
 <h2>@ViewData["Title"]</h2>
 
 <p>
-    <a asp-page="Create">Create New Event</a>
+    <a class="create-button" asp-page="Create">+ Create New Event</a>
 </p>
 
 @if (!Model.Events.Any())
 {
-    <p>No events found.</p>
+    <p class="no-events">No events found.</p>
 }
 else
 {
-    <ul>
+    <ul class="event-list">
         @foreach (var evt in Model.Events)
         {
-            <li>
-                <strong>@evt.Title</strong> - @evt.Date.ToShortDateString()
-                <br />
-                @evt.Description
-                <br />
+            <li class="event-card">
+                <strong>@evt.Title</strong>
+                <div class="date">@evt.Date.ToShortDateString()</div>
+                <div class="description">@evt.Description</div>
                 <a asp-page="Register" asp-route-id="@evt.Id">Register</a>
+                <a asp-page="Edit" asp-route-id="@evt.Id">Edit</a>
             </li>
         }
     </ul>
