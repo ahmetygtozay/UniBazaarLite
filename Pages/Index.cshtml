@@ -3,8 +3,32 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<link rel="stylesheet" href="~/css/features.css" />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="features-container">
+    <div class="feature-card feature-auth">
+        <h3>Simulated Authentication</h3>
+        <p>Secure sections with a simple simulated user authentication system.</p>
+    </div>
+
+    <div class="feature-card feature-database">
+        <h3>In-Memory Data</h3>
+        <p>Fast data storage using an in-memory repository for demo and testing purposes.</p>
+    </div>
+
+    <div class="feature-card feature-ui">
+        <h3>Clean UI Design</h3>
+        <p>Consistent and modern UI with shared layouts and reusable components.</p>
+    </div>
+    <div class="feature-card feature-events">
+        <h3>Events</h3>
+        <p>Browse, create, and manage upcoming events easily with our intuitive event system.</p>
+        <a class="btn" asp-page="/Events/Index">Explore Events</a>
+    </div>
+    <div class="feature-card feature-items">
+        <h3>Items for Sale</h3>
+        <p>List your items and find great deals in our marketplace.</p>
+        <a class="btn" asp-controller="Items" asp-action="Index">View Items</a>
+    </div>
 </div>

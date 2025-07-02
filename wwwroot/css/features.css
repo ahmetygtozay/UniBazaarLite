@@ -1,0 +1,122 @@
+﻿.features-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.feature-card {
+    flex: 1 1 220px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 25px 20px;
+    color: #222;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+    min-width: 220px;
+    max-width: 280px;
+}
+
+    .feature-card h3 {
+        margin-top: 0;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #004080;
+    }
+
+    .feature-card p {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    /* Hover efekti */
+    .feature-card:hover {
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        transform: translateY(-5px);
+    }
+
+/* Renk temaları */
+
+.feature-auth {
+    background-color: #cce5ff; /* light blue */
+    color: #003366;
+}
+
+.feature-database {
+    background-color: #d4edda; /* light green */
+    color: #856404;
+}
+
+.feature-ui {
+    background-color: #f8d7da; /* light red/pink */
+    color: #721c24;
+}
+/* Events */
+.feature-events {
+    background-color: #e0f0ff; /* light blue */
+    color: #004080;
+    border-left: 6px solid #007bff;
+    position: relative;
+    padding-left: 25px;
+}
+
+    .feature-events::before {
+        position: absolute;
+        left: 10px;
+        top: 20px;
+        font-size: 24px;
+    }
+
+
+.feature-items {
+    background-color: #fff4e5; /* light orange */
+    color: #b35900;
+    border-left: 6px solid #ffa500;
+    position: relative;
+    padding-left: 25px;
+}
+
+    .feature-items::before {
+        position: absolute;
+        left: 10px;
+        top: 20px;
+        font-size: 24px;
+    }
+
+a.btn {
+    display: inline-block;
+    padding: 10px 22px;
+    background-color: #004080;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 64, 128, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+    user-select: none;
+}
+
+    a.btn:hover,
+    a.btn:focus {
+        background-color: #0059b3;
+        box-shadow: 0 6px 12px rgba(0, 89, 179, 0.5);
+        outline: none;
+    }
+
+
+/* Responsiveness */
+@media (max-width: 720px) {
+    .features-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-card {
+        max-width: 90%;
+    }
+}

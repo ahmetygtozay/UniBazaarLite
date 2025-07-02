@@ -15,7 +15,7 @@ namespace UniBazaarLite.Data
         Listing? GetListingById(int id);
         void AddListing(Listing listing);
 
-        // BURAYA EKLE
+        
         int GetNextEventId();
     }
 }

@@ -1,0 +1,36 @@
+﻿.contact-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    color: #333;
+    line-height: 1.6;
+    text-align: center;
+}
+
+    .contact-container h2 {
+        color: #004080;
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .contact-container p {
+        font-size: 18px;
+        margin-bottom: 18px;
+    }
+
+    .contact-container a {
+        color: #004080;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+        .contact-container a:hover,
+        .contact-container a:focus {
+            color: #007acc;
+            text-decoration: underline;
+        }
